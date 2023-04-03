@@ -92,13 +92,15 @@ func getBookIdHandler(ctx *gin.Context) {
 	row := db.QueryRow(query, id)
 
 	err = row.Scan(&book.ID, &book.Title, &book.Author, &book.Desc)
-
 	if err != nil {
-    	ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
 		})
-	return
+
+		return
+		
 	}
+
 	ctx.JSON(http.StatusOK, book)
 
 }
